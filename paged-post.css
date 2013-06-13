@@ -1,0 +1,51 @@
+.pagination-slider .pps-the-content{
+		margin-bottom:.813em 0;
+		}
+
+	.pps-slider-nav{
+		border-bottom:1px solid #ccc;
+		border-top:1px solid #ccc;	
+		font-size:1.1em;
+		font-weight:bold;
+		margin:1em 0;
+		min-height:2.5em;
+		text-transform:uppercase;
+		padding:.75em 0;
+		position:relative;
+		}
+
+		.pps-slide-count{
+			display:block;
+			text-align:center;
+			text-transform:none;
+			}
+
+		.pps-slider-nav .pps-next{
+			padding-right:.2em;
+			position:absolute;
+			right:0;
+			}
+
+		.pps-slider-nav .pps-prev{
+			left:0;
+			padding-left:.2em;
+			position:absolute;
+			}
+
+	.pps-slider-nav-bottom{
+		margin-top:2.45em;
+		text-align:left;
+		}
+
+	.pps-slider-nav-bottom.first-slide{
+	text-align:right;
+	}
+
+	.pps-slider-nav-bottom.first-slide .pps-next{
+		position:relative;
+		}
+	
+	.pps-slider-nav-bottom .pps-prev{
+		position:relative;
+		}
+
