@@ -65,7 +65,7 @@ function paged_post_the_content_filter( $content ) {
 		}
 	}
 
-    if ( is_single() )
+    if ( is_single() && $multipage ){
         $ppscontent = '<div class="pps-wrap-content"><div class="pps-the-content '.$slideclass.'">';
 
 		if((get_option( 'pps_nav_position' ) == 'top')||(get_option( 'pps_nav_position' ) == 'both')){
@@ -101,7 +101,9 @@ function paged_post_the_content_filter( $content ) {
 			}
 
 		$ppscontent .= '</div></div>';
-
+	} else {
+		$ppscontent .= $content;
+		}
     // Returns the content.
     return $ppscontent;
 }
