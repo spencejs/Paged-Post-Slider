@@ -59,6 +59,9 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 == Changelog ==
 
+= 1.2 =
+* Fixed Tagging
+
 = 1.1 =
 * CSS styles now clear any floats in a slide.
 * Added link to demo page.
