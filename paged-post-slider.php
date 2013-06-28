@@ -69,7 +69,7 @@ function paged_post_the_content_filter( $content ) {
         $ppscontent = '<div class="pps-wrap-content"><div class="pps-the-content '.$slideclass.'">';
 
 		if((get_option( 'pps_nav_position' ) == 'top')||(get_option( 'pps_nav_position' ) == 'both')){
-			$ppscontent .= '<nav class="pps-slider-nav">';
+			$ppscontent .= '<nav class="pps-slider-nav pps-clearfix">';
 			$ppscontent .= wp_link_pages();
 			
 			if((get_option( 'pps_count_position' ) == 'top')||(get_option( 'pps_count_position' ) == 'both')){
@@ -83,10 +83,10 @@ function paged_post_the_content_filter( $content ) {
 				$ppscontent .= $slidecount;
 		}
 
-		$ppscontent .= $content;
+		$ppscontent .= '<div class="pps-content pps-clearfix">'.$content.'</div>';
 
 		if((get_option( 'pps_nav_position' ) == 'bottom')||(get_option( 'pps_nav_position' ) == 'both')){
-			$ppscontent .= '<nav class="pps-slider-nav">';
+			$ppscontent .= '<nav class="pps-slider-nav pps-clearfix">';
 			$ppscontent .= wp_link_pages();
 			
 			if((get_option( 'pps_count_position' ) == 'bottom')||(get_option( 'pps_count_position' ) == 'both')){

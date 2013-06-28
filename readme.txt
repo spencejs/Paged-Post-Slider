@@ -1,7 +1,7 @@
 === Paged Post Slider ===
 Contributors: spencejosiah
-Donate link: http://josiahspence.com/
-Tags: slider, paged posts, pagination, ajax, carousel
+Donate link: http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider/
+Tags: slider, paged posts, pagination, ajax, carousel, multi-page, nextpage
 Requires at least: 3.5.1
 Tested up to: 3.5.1
 Stable tag: 1.0
@@ -14,7 +14,7 @@ Automagically turns multi-page posts into an ajax-based slideshow. Simply activa
 
 Wordpress has an excellent, but little known, [feature](http://codex.wordpress.org/Styling_Page-Links) for splitting up long posts into multiple pages. However, a growing trend among major news and blog sites is instead to split up posts into dynamically loading sliders. While there are many slider plugins available for Wordpress, none of them quite tackles this functionality. That's where the Paged Post Slider comes in: it takes normal multi-page posts from Wordpress and replaces them with an all-ajax slider that requires almost no setup.
 
-What the slider does:
+### What the slider does:
 
 *   Replaces Wordpress' built-in post pagination funtionality with an ajax-based carousel.
 *   Uses hash based URLs for easy direct linking to specific slides. This also preserves the functionality of the browser's Back button.
@@ -22,6 +22,10 @@ What the slider does:
 *   Adds the 'Insert Page Break' button to the TinyMCE post editor so that you can easily split your content into multiple pages/slides.
 *   Provides an optional stylesheet for (very) basic styling of the slider navigation.
 *   Degrades gracefully. If the plugin is missing or uninstalled, posts will behave exactly like normal multi-page posts.
+
+### Demo:
+
+See a [demo](http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider/paged-post-slider-demo/) of the slider in action.
 
 == Installation ==
 
@@ -33,7 +37,7 @@ What the slider does:
 
 == Frequently Asked Questions ==
 
-= How do I split up my posts into different slides?
+= How do I split up my posts into different slides? =
 
 Just treat it like a normal Wordpress multi-page post. To make this extra-easy, the plugin activates the 'Insert Page Break' button in the post editor. Just insert your cursor wherever you want to break between slides and click the button - Presto! You have a new slide!
 
@@ -54,6 +58,10 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 3. An example of a post broken up into slides on the backend. Note the 'Insert Page Break' button.
 
 == Changelog ==
+
+= 1.1 =
+* CSS styles now clear any floats in a slide.
+* Added link to demo page.
 
 = 1.0 =
 * Intial commit.

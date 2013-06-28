@@ -23,6 +23,10 @@ What the slider does:
 *   Provides an optional stylesheet for (very) basic styling of the slider navigation.
 *   Degrades gracefully. If the plugin is missing or uninstalled, posts will behave exactly like normal multi-page posts.
 
+### Demo:
+
+See a [demo](http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider/paged-post-slider-demo/) of the slider in action.
+
 ## Installation
 
 1. Upload the 'paged-post-slider' directory to the `/wp-content/plugins/` directory
@@ -33,17 +37,17 @@ What the slider does:
 
 ## Frequently Asked Questions
 
-= How do I split up my posts into different slides?
+### How do I split up my posts into different slides?
 
 Just treat it like a normal Wordpress multi-page post. To make this extra-easy, the plugin activates the 'Insert Page Break' button in the post editor. Just insert your cursor wherever you want to break between slides and click the button - Presto! You have a new slide!
 
 For more information about Wordpress' built-in multi-page post funtionality, visit [this page](http://codex.wordpress.org/Styling_Page-Links).
 
-= Why am I seeing an extra Next/Previous navigation element in my theme? =
+### Why am I seeing an extra Next/Previous navigation element in my theme?
 
 Your theme contains its own `wp_link_pages()` tag to accomodate Wordpress' built-in post pagination feature. To ensure that this does not interfere with the plugin, please remove any reference to the  `wp_link_pages()` tag from your `single.php` file. Note that it is possible that the tag is inluded in a template part, rather than directly in the `single.php` file itself. 
 
-= How can I change the way the slider looks? =
+### How can I change the way the slider looks?
 
 The Paged Post Slider is designed to be syled by the user using standard CSS. On the plugin's Settings page, you can choose to use the included styles, but even these are meant only as a basic starting point.
 
@@ -54,6 +58,10 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 3. An example of a post broken up into slides on the backend. Note the 'Insert Page Break' button.
 
 ## Changelog
+
+= 1.1 =
+* CSS styles now clear any floats in a slide.
+* Added link to demo page.
 
 = 1.0 =
 * Intial commit.
