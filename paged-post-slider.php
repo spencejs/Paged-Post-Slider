@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.0
+Version: 1.2
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL

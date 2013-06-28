@@ -4,7 +4,7 @@ Donate link: http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider
 Tags: slider, paged posts, pagination, ajax, carousel, multi-page, nextpage
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 1.0
+Stable tag: 1.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
