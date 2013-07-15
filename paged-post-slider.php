@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.2
+Version: 1.2.5
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL
@@ -11,28 +11,32 @@ License: WTFPL
 
 //Enqueue Scripts and Styles
 function paged_post_scripts() {
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('jquery-paged-post',plugins_url( 'paged-post.js' , __FILE__ ), 'jquery', '', true);
-
-	if(get_option( 'pps_style_sheet') ){
-		wp_enqueue_style('paged-post-style',plugins_url( 'paged-post.css' , __FILE__ ));
+	global $multipage;
+	if(is_single() && $multipage ){
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('jquery-paged-post',plugins_url( 'paged-post.js' , __FILE__ ), 'jquery', '', true);
+		if(get_option( 'pps_style_sheet')){
+			wp_enqueue_style('paged-post-style',plugins_url( 'paged-post.css' , __FILE__ ));
+		}
 	}
 }
 
 add_action( 'wp_enqueue_scripts', 'paged_post_scripts' ); // wp_enqueue_scripts action hook to link only on the front-end
 
 //Add NextPage Button to TinyMCE
-add_filter('mce_buttons', function ($mce_buttons) {
-    $pos = array_search('wp_more', $mce_buttons, true);
-    if ($pos !== false) {
-        $buttons = array_slice($mce_buttons, 0, $pos + 1);
- 
-        $buttons[] = 'wp_page';     
- 
-        $mce_buttons = array_merge($buttons, array_slice($mce_buttons, $pos + 1));
-    }
-    return $mce_buttons;
-});
+function paged_post_tinymce($mce_buttons) {
+	$pos = array_search('wp_more', $mce_buttons, true);
+	if ($pos !== false) {
+		$buttons = array_slice($mce_buttons, 0, $pos + 1);
+
+		$buttons[] = 'wp_page';
+
+		$mce_buttons = array_merge($buttons, array_slice($mce_buttons, $pos + 1));
+	}
+	return $mce_buttons;
+}
+
+add_filter('mce_buttons', 'paged_post_tinymce');
 
 //Set defaults to wp_link_pages
 function paged_post_link_pages($r) {
@@ -212,7 +216,7 @@ function pps_options_page() {
 <?php }
 
 //Add Settings Link To Plugins Page
-function set_plugin_meta($links, $file) {
+function pps_plugin_meta($links, $file) {
 	$plugin = plugin_basename(__FILE__);
 	// create link
 	if ($file == $plugin) {
@@ -224,5 +228,5 @@ function set_plugin_meta($links, $file) {
 	return $links;
 }
 
-add_filter( 'plugin_row_meta', 'set_plugin_meta', 10, 2 );
+add_filter( 'plugin_row_meta', 'pps_plugin_meta', 10, 2 );
 ?>

@@ -3,8 +3,8 @@ Contributors: spencejosiah
 Donate link: http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider/
 Tags: slider, paged posts, pagination, ajax, carousel, multi-page, nextpage
 Requires at least: 3.5.1
-Tested up to: 3.5.1
-Stable tag: 1.2
+Tested up to: 3.5.2
+Stable tag: 1.2.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,8 +59,17 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 == Changelog ==
 
-= 1.2 =
-* Fixed Tagging
+= 1.2.5 =
+* Fixes possible conflict with other plugins
+
+= 1.2.4 =
+* Restricted script and css to only load on posts that use the slider
+
+= 1.2.3 =
+* Cleaned up TinyMCE function.
+
+= 1.2.2 =
+* Fixed Tagging.
 
 = 1.1 =
 * CSS styles now clear any floats in a slide.
@@ -68,3 +77,14 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 = 1.0 =
 * Intial commit.
+
+== Upgrade Notice ==
+
+= 1.2.5 =
+* Fixes possible conflict with other plugins
+
+= 1.2.4 =
+Adds efficiency by only calling slider assets on post where the slider is used
+
+= 1.2 =
+Adds clearfix to included CSS. This ensures that no floated items overlap the bottom nav.

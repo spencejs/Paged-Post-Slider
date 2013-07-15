@@ -3,8 +3,8 @@ Contributors: spencejosiah
 Donate link: http://josiahspence.com/  
 Tags: slider, paged posts, pagination, ajax, carousel  
 Requires at least: 3.5.1  
-Tested up to: 3.5.1  
-Stable tag: 1.2  
+Tested up to: 3.5.2  
+Stable tag: 1.2.5
 License: GPLv2  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,8 +59,17 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 ## Changelog
 
-= 1.2 =
-Fixed tagging.
+= 1.2.5 =
+* Fixes possible conflict with other plugins
+
+= 1.2.4 =
+* Restricted script and css to only load on posts that use the slider
+
+= 1.2.3 =
+* Cleaned up TinyMCE function
+
+= 1.2.2 =
+* Fixed tagging.
 
 = 1.1 =
 * CSS styles now clear any floats in a slide.
