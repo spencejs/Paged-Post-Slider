@@ -11,8 +11,7 @@ License: WTFPL
 
 //Enqueue Scripts and Styles
 function paged_post_scripts() {
-	global $multipage;
-	if(is_single() && $multipage ){
+	if(is_single()){
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-paged-post',plugins_url( 'paged-post.js' , __FILE__ ), 'jquery', '', true);
 		if(get_option( 'pps_style_sheet')){
