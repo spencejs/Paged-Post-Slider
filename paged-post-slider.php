@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.2.5
+Version: 1.2.7
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL
@@ -11,7 +11,7 @@ License: WTFPL
 
 //Enqueue Scripts and Styles
 function paged_post_scripts() {
-	if(is_single()){
+	if(is_single() || is_page() ){
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-paged-post',plugins_url( 'paged-post.js' , __FILE__ ), 'jquery', '', true);
 		if(get_option( 'pps_style_sheet')){
@@ -68,8 +68,8 @@ function paged_post_the_content_filter( $content ) {
 		}
 	}
 
-    if ( is_single() && $multipage ){
-        $ppscontent = '<div class="pps-wrap-content"><div class="pps-the-content '.$slideclass.'">';
+	if ( (is_single() && $multipage) || (is_page() && $multipage) ){
+		$ppscontent = '<div class="pps-wrap-content"><div class="pps-the-content '.$slideclass.'">';
 
 		if((get_option( 'pps_nav_position' ) == 'top')||(get_option( 'pps_nav_position' ) == 'both')){
 			$ppscontent .= '<nav class="pps-slider-nav pps-clearfix">';
