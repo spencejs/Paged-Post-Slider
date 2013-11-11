@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.2.7
+Version: 1.3
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL
@@ -40,11 +40,11 @@ add_filter('mce_buttons', 'paged_post_tinymce');
 //Set defaults to wp_link_pages
 function paged_post_link_pages($r) {
 	$args = array(
-		'before'           => '',
-		'after'            => '',
-		'next_or_number'   => 'next',
-		'nextpagelink'     => __('<span class="pps-next">Next</span>'),
-		'previouspagelink' => __('<span class="pps-prev">Previous</span>'),
+		'before'			=> '',
+		'after'				=> '',
+		'next_or_number'	=> 'next',
+		'nextpagelink'		=> __('<span class="pps-next">Next</span>'),
+		'previouspagelink'	=> __('<span class="pps-prev">Previous</span>'),
 		'echo' => 0
 	  );
 	  return wp_parse_args($args, $r);
@@ -107,8 +107,8 @@ function paged_post_the_content_filter( $content ) {
 	} else {
 		$ppscontent .= $content;
 		}
-    // Returns the content.
-    return $ppscontent;
+	// Returns the content.
+	return $ppscontent;
 }
 
 add_filter( 'the_content', 'paged_post_the_content_filter' );
@@ -122,11 +122,11 @@ function pps_add_options() {
 }
 
 function pps_options_page() {
-    // variables for the field and option names 
-    $opt_name = array('nav_position' =>'pps_nav_position',
-			      'count_position' => 'pps_count_position',
-			      'style_sheet' => 'pps_style_sheet');
-    $hidden_field_name = 'pps_submit_hidden';
+	// variables for the field and option names 
+	$opt_name = array('nav_position' =>'pps_nav_position',
+					'count_position' => 'pps_count_position',
+					'style_sheet' => 'pps_style_sheet');
+	$hidden_field_name = 'pps_submit_hidden';
 
 	// Read in existing option value from database
 	$opt_val = array('nav_position' => get_option( $opt_name['nav_position'] ),
@@ -145,7 +145,7 @@ function pps_options_page() {
 		update_option( $opt_name['nav_position'], $opt_val['nav_position'] );
 		update_option( $opt_name['count_position'], $opt_val['count_position'] );
 		update_option( $opt_name['style_sheet'], $opt_val['style_sheet'] );
-	
+
 		// Put an options updated message on the screen
 		?>
 		<div id="message" class="updated fade">
