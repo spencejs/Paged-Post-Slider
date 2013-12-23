@@ -3,8 +3,8 @@ Contributors: spencejosiah
 Donate link: http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider/
 Tags: slider, paged posts, pagination, ajax, carousel, multi-page, nextpage
 Requires at least: 3.5.1
-Tested up to: 3.7.1
-Stable tag: 1.3
+Tested up to: 3.8
+Stable tag: 1.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,12 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 == Changelog ==
 
+= 1.4 =
+* Adds option to loop from the last slide back to the first.
+* Adds option to display a "View Full Post" link below the slideshow.
+* Refines Nvigation CSS.
+* Better commented code.
+
 = 1.3 =
 * Adds support for additional permalink structures. Stuctures now include Wordpress default, trailing slash, no trailing slash, ending in .html, and ending in .htm.
 
@@ -88,6 +94,12 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 * Intial commit.
 
 == Upgrade Notice ==
+
+= 1.4 =
+* Adds option to loop from the last slide back to the first.
+* Adds option to display a "View Full Post" link below the slideshow.
+* Refines Nvigation CSS.
+* Better commented code.
 
 = 1.3 =
 * Adds support for additional permalink structures. Stuctures now include Wordpress default, trailing slash, no trailing slash, ending in .html, and ending in .htm.

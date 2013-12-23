@@ -7,8 +7,9 @@
 		border-top:1px solid #ccc;	
 		font-size:1.1em;
 		font-weight:bold;
+		line-height: 1.5;
 		margin:1em 0;
-		min-height:2.5em;
+		min-height:3em;
 		text-transform:uppercase;
 		padding:.75em 0;
 		position:relative;

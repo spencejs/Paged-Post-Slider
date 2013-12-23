@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.3
+Version: 1.4
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL
@@ -56,57 +56,101 @@ add_filter('wp_link_pages_args','paged_post_link_pages');
 function paged_post_the_content_filter( $content ) {
 
 	global $multipage, $numpages, $page;
-	if($multipage){
-		$sliderclass = 'pagination-slider';
-		$slidecount = '<span class="pps-slide-count">'.$page.' of '.$numpages.'</span>';
-		if($page == $numpages){
-			$slideclass = 'pps-last-slide';
-		} elseif ($page == 1){
-			$slideclass = 'pps-first-slide';
-		} else{
-			$slideclass = 'pps-middle-slide';
-		}
-	}
 
-	if ( (is_single() && $multipage) || (is_page() && $multipage) ){
-		$ppscontent = '<div class="pps-wrap-content"><div class="pps-the-content '.$slideclass.'">';
-
-		if((get_option( 'pps_nav_position' ) == 'top')||(get_option( 'pps_nav_position' ) == 'both')){
-			$ppscontent .= '<nav class="pps-slider-nav pps-clearfix">';
-			$ppscontent .= wp_link_pages();
-			
-			if((get_option( 'pps_count_position' ) == 'top')||(get_option( 'pps_count_position' ) == 'both')){
-				$ppscontent .= $slidecount;
-			}
-
-			$ppscontent .= '</nav>';
+	//Show Full Post If Full Post Option
+	if($_GET['pps'] == 'full_post'){
+		global $post;
+		$ppscontent .= wpautop($post->post_content);
+		if(get_option( 'pps_show_all_link')){
+			$ppscontent .=  '<p class="pps-fullpost-link"><a href="'.get_permalink().'" title="View as Slideshow">View as Slideshow</a></p>';
 		}
 
-		if(((get_option( 'pps_count_position' ) == 'top')||(get_option( 'pps_count_position' ) == 'both')) && ((get_option( 'pps_nav_position' ) != 'top')&&(get_option( 'pps_nav_position' ) != 'both'))){
-				$ppscontent .= $slidecount;
-		}
-
-		$ppscontent .= '<div class="pps-content pps-clearfix">'.$content.'</div>';
-
-		if((get_option( 'pps_nav_position' ) == 'bottom')||(get_option( 'pps_nav_position' ) == 'both')){
-			$ppscontent .= '<nav class="pps-slider-nav pps-clearfix">';
-			$ppscontent .= wp_link_pages();
-			
-			if((get_option( 'pps_count_position' ) == 'bottom')||(get_option( 'pps_count_position' ) == 'both')){
-				$ppscontent .= $slidecount;
-			}
-
-			$ppscontent .= '</nav>';
-		}
-
-		if(((get_option( 'pps_count_position' ) == 'bottom')||(get_option( 'pps_count_position' ) == 'both')) && ((get_option( 'pps_nav_position' ) != 'bottom')&&(get_option( 'pps_nav_position' ) != 'both'))){
-				$ppscontent .= $slidecount;
-			}
-
-		$ppscontent .= '</div></div>';
+	//Else Show Slideshow
 	} else {
-		$ppscontent .= $content;
-		}
+
+		//If is Paginated, Work Slideshow Magic
+		if ( (is_single() && $multipage) || (is_page() && $multipage) ){
+
+			$sliderclass = 'pagination-slider';
+			$slidecount = '<span class="pps-slide-count">'.$page.' of '.$numpages.'</span>';
+			if($page == $numpages){
+				$slideclass = 'pps-last-slide';
+			} elseif ($page == 1){
+				$slideclass = 'pps-first-slide';
+			} else{
+				$slideclass = 'pps-middle-slide';
+			}
+
+			//What to Display For Content
+			$ppscontent = '<div class="pps-wrap-content"><div class="pps-the-content '.$slideclass.'">';
+
+			//Top Slider Navigation
+			if((get_option( 'pps_nav_position' ) == 'top')||(get_option( 'pps_nav_position' ) == 'both')){
+				$ppscontent .= '<nav class="pps-slider-nav pps-clearfix">';
+
+				$ppscontent .= wp_link_pages();
+
+				// If Loop Option Selected, Loop back to Beginning
+				if(get_option( 'pps_loop_slides')){
+					if($page == $numpages){
+						$ppscontent .= '<a href="'.get_permalink().'"><span class="pps-next">Next</span></a>';
+					}
+				}
+
+				// Top Slide Counter
+				if((get_option( 'pps_count_position' ) == 'top')||(get_option( 'pps_count_position' ) == 'both')){
+					$ppscontent .= $slidecount;
+				}
+
+				$ppscontent .= '</nav>';
+			}
+
+			//Top Slide Counter Without Top Nav
+			if(((get_option( 'pps_count_position' ) == 'top')||(get_option( 'pps_count_position' ) == 'both')) && ((get_option( 'pps_nav_position' ) != 'top')&&(get_option( 'pps_nav_position' ) != 'both'))){
+					$ppscontent .= $slidecount;
+			}
+
+			// Slide Content
+			$ppscontent .= '<div class="pps-content pps-clearfix">'.$content.'</div>';
+
+			// Bottom Slider Navigation
+			if((get_option( 'pps_nav_position' ) == 'bottom')||(get_option( 'pps_nav_position' ) == 'both')){
+				$ppscontent .= '<nav class="pps-slider-nav pps-bottom-nav pps-clearfix">';
+				$ppscontent .= wp_link_pages();
+
+				// If Loop Option Selected, Loop back to Beginning
+				if(get_option( 'pps_loop_slides')){
+					if($page == $numpages){
+						$ppscontent .= '<a href="'.get_permalink().'"><span class="pps-next">Next</span></a>';
+					}
+				}
+
+				// Bottom Slide Counter
+				if((get_option( 'pps_count_position' ) == 'bottom')||(get_option( 'pps_count_position' ) == 'both')){
+					$ppscontent .= $slidecount;
+				}
+
+				$ppscontent .= '</nav>';
+			}
+
+			// Bottom Slide Counter Without Bottom Nav
+			if(((get_option( 'pps_count_position' ) == 'bottom')||(get_option( 'pps_count_position' ) == 'both')) && ((get_option( 'pps_nav_position' ) != 'bottom')&&(get_option( 'pps_nav_position' ) != 'both'))){
+					$ppscontent .= $slidecount;
+				}
+
+			// End Slider Div
+			$ppscontent .= '</div></div>';
+
+			// Show Full Post Link
+			if(get_option( 'pps_show_all_link')){
+				$ppscontent .=  '<p class="pps-fullpost-link"><a href="'.add_query_arg( 'pps', 'full_post', get_permalink() ).'" title="View Full Post">View Full Post</a></p>';
+			}
+
+		// Else It Isn't Pagintated, Don't Show Slider
+		} else {
+			$ppscontent .= $content;
+			}
+	}
 	// Returns the content.
 	return $ppscontent;
 }
@@ -125,13 +169,17 @@ function pps_options_page() {
 	// variables for the field and option names 
 	$opt_name = array('nav_position' =>'pps_nav_position',
 					'count_position' => 'pps_count_position',
-					'style_sheet' => 'pps_style_sheet');
+					'style_sheet' => 'pps_style_sheet',
+					'show_all_link' => 'pps_show_all_link',
+					'loop_slides' => 'pps_loop_slides');
 	$hidden_field_name = 'pps_submit_hidden';
 
 	// Read in existing option value from database
 	$opt_val = array('nav_position' => get_option( $opt_name['nav_position'] ),
 				'count_position' => get_option( $opt_name['count_position'] ),
-				'style_sheet' => get_option( $opt_name['style_sheet'] ));
+				'style_sheet' => get_option( $opt_name['style_sheet'] ),
+				'show_all_link' => get_option( $opt_name['show_all_link'] ),
+				'loop_slides' => get_option( $opt_name['loop_slides'] ));
 
 	// See if the user has posted us some information
 	// If they did, this hidden field will be set to 'Y'
@@ -139,12 +187,16 @@ function pps_options_page() {
 		// Read their posted value
 		$opt_val = array('nav_position' => $_POST[ $opt_name['nav_position'] ],
 					'count_position' => $_POST[ $opt_name['count_position'] ],
-					'style_sheet' => $_POST[ $opt_name['style_sheet'] ]);
+					'style_sheet' => $_POST[ $opt_name['style_sheet'] ],
+					'show_all_link' => $_POST[ $opt_name['show_all_link'] ],
+					'loop_slides' => $_POST[ $opt_name['loop_slides'] ]);
 
 		// Save the posted value in the database
 		update_option( $opt_name['nav_position'], $opt_val['nav_position'] );
 		update_option( $opt_name['count_position'], $opt_val['count_position'] );
 		update_option( $opt_name['style_sheet'], $opt_val['style_sheet'] );
+		update_option( $opt_name['show_all_link'], $opt_val['show_all_link'] );
+		update_option( $opt_name['loop_slides'], $opt_val['loop_slides'] );
 
 		// Put an options updated message on the screen
 		?>
@@ -155,8 +207,9 @@ function pps_options_page() {
 		</div>
 	<?php
 		}
-	?>
 
+	//Options Form 
+	?>
 	<div class="wrap">
 		<h2><?php _e( 'Paged Post Slider Options', 'pps_trans_domain' ); ?></h2>
 
@@ -199,6 +252,24 @@ function pps_options_page() {
 						</th>
 						<td>
 								<input name="<?php echo $opt_name['style_sheet']; ?>" type="checkbox" value="1" <?php checked( '1', $opt_val['style_sheet'] ); ?> /> If unchecked, no styles will be added.
+						</td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $opt_name['show_all_link']?>">Display link to <em>View Full Post</em>?</label>
+						</th>
+						<td>
+								<input name="<?php echo $opt_name['show_all_link']; ?>" type="checkbox" value="1" <?php checked( '1', $opt_val['show_all_link'] ); ?> /> If unchecked, the <em>View Full Post</em> link will not be displayed.
+						</td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $opt_name['loop_slides']?>">Loop slides?</label>
+						</th>
+						<td>
+								<input name="<?php echo $opt_name['loop_slides']; ?>" type="checkbox" value="1" <?php checked( '1', $opt_val['loop_slides'] ); ?> /> Creates an infinite loop of the slides.
 						</td>
 					</tr>
 
