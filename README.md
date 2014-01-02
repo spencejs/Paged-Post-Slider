@@ -4,7 +4,7 @@ Donate link: http://josiahspence.com/
 Tags: slider, paged posts, pagination, ajax, carousel  
 Requires at least: 3.5.1  
 Tested up to: 3.8
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv2  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 3. An example of a post broken up into slides on the backend. Note the 'Insert Page Break' button.
 
 ## Changelog
+
+= 1.5.1 =
+* Slight fix to javascript.
 
 = 1.5 =
 * Adds option to automatically scroll back to top when a new slide loads.

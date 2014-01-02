@@ -28,7 +28,6 @@ var address = window.location.href.replace(window.location.hash,'');
 			success:function(res){
 				$(".pps-wrap-content").html($(res).find(".pps-the-content").fadeIn('slow').addClass('done'));
 				$('.pps-slider-nav a').bind('click',ajaxNav);
-				console.log(pps_options_object.scroll_up);
 				if (pps_options_object.scroll_up) {
 					$('html, body').animate({
 						scrollTop: 0
