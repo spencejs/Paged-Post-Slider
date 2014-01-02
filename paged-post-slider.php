@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.4
+Version: 1.5
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL
@@ -14,6 +14,8 @@ function paged_post_scripts() {
 	if(is_single() || is_page() ){
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-paged-post',plugins_url( 'paged-post.js' , __FILE__ ), 'jquery', '', true);
+		$pps_options_array = array( 'scroll_up' => get_option( 'pps_scroll_up') );
+		wp_localize_script( 'jquery-paged-post', 'pps_options_object', $pps_options_array );
 		if(get_option( 'pps_style_sheet')){
 			wp_enqueue_style('paged-post-style',plugins_url( 'paged-post.css' , __FILE__ ));
 		}
@@ -171,7 +173,8 @@ function pps_options_page() {
 					'count_position' => 'pps_count_position',
 					'style_sheet' => 'pps_style_sheet',
 					'show_all_link' => 'pps_show_all_link',
-					'loop_slides' => 'pps_loop_slides');
+					'loop_slides' => 'pps_loop_slides',
+					'scroll_up' => 'pps_scroll_up');
 	$hidden_field_name = 'pps_submit_hidden';
 
 	// Read in existing option value from database
@@ -179,7 +182,8 @@ function pps_options_page() {
 				'count_position' => get_option( $opt_name['count_position'] ),
 				'style_sheet' => get_option( $opt_name['style_sheet'] ),
 				'show_all_link' => get_option( $opt_name['show_all_link'] ),
-				'loop_slides' => get_option( $opt_name['loop_slides'] ));
+				'loop_slides' => get_option( $opt_name['loop_slides'] ),
+				'scroll_up' => get_option( $opt_name['scroll_up'] ));
 
 	// See if the user has posted us some information
 	// If they did, this hidden field will be set to 'Y'
@@ -189,7 +193,8 @@ function pps_options_page() {
 					'count_position' => $_POST[ $opt_name['count_position'] ],
 					'style_sheet' => $_POST[ $opt_name['style_sheet'] ],
 					'show_all_link' => $_POST[ $opt_name['show_all_link'] ],
-					'loop_slides' => $_POST[ $opt_name['loop_slides'] ]);
+					'loop_slides' => $_POST[ $opt_name['loop_slides'] ],
+					'scroll_up' => $_POST[ $opt_name['scroll_up'] ]);
 
 		// Save the posted value in the database
 		update_option( $opt_name['nav_position'], $opt_val['nav_position'] );
@@ -197,6 +202,7 @@ function pps_options_page() {
 		update_option( $opt_name['style_sheet'], $opt_val['style_sheet'] );
 		update_option( $opt_name['show_all_link'], $opt_val['show_all_link'] );
 		update_option( $opt_name['loop_slides'], $opt_val['loop_slides'] );
+		update_option( $opt_name['scroll_up'], $opt_val['scroll_up'] );
 
 		// Put an options updated message on the screen
 		?>
@@ -270,6 +276,15 @@ function pps_options_page() {
 						</th>
 						<td>
 								<input name="<?php echo $opt_name['loop_slides']; ?>" type="checkbox" value="1" <?php checked( '1', $opt_val['loop_slides'] ); ?> /> Creates an infinite loop of the slides.
+						</td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $opt_name['scroll_up']?>">Scroll to top of page after slide load?</label>
+						</th>
+						<td>
+								<input name="<?php echo $opt_name['scroll_up']; ?>" type="checkbox" value="1" <?php checked( '1', $opt_val['scroll_up'] ); ?> /> Scrolls up to the top of the page after each slide loads.
 						</td>
 					</tr>
 

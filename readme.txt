@@ -4,7 +4,7 @@ Donate link: http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider
 Tags: slider, paged posts, pagination, ajax, carousel, multi-page, nextpage
 Requires at least: 3.5.1
 Tested up to: 3.8
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Wordpress has an excellent, but little known, [feature](http://codex.wordpress.o
 *   Automatically adds slide navigation and a slide counter (e.g. '1 of 5') to sliders according to the preferences you set.
 *   Adds the 'Insert Page Break' button to the TinyMCE post editor so that you can easily split your content into multiple pages/slides.
 *   Provides an optional stylesheet for (very) basic styling of the slider navigation.
+*	Optionally allows infinite looping of slides.
+*	Optionally provides a link to view all slides on a single page.
+*	Optionally allows for scrolling back to top when each slide loads.
 *   Degrades gracefully. If the plugin is missing or uninstalled, posts will behave exactly like normal multi-page posts.
 
 ### Demo:
@@ -59,6 +62,9 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 == Changelog ==
 
+= 1.5 =
+* Adds option to automatically scroll back to top when a new slide loads.
+
 = 1.4 =
 * Adds option to loop from the last slide back to the first.
 * Adds option to display a "View Full Post" link below the slideshow.
@@ -94,6 +100,9 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 * Intial commit.
 
 == Upgrade Notice ==
+
+= 1.5 =
+* Adds option to automatically scroll back to top when a new slide loads.
 
 = 1.4 =
 * Adds option to loop from the last slide back to the first.
