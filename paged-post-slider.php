@@ -3,7 +3,7 @@
 Plugin Name: Paged Post Slider
 Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Automagically turns multi-page posts into an ajax-based slideshow. Simply activate, choose the display options for your slider, and go! For best results, please be sure that the single.php file in your theme does <strong>not</strong> contain the <em>wp_link_pages</em> tag.
-Version: 1.5.1
+Version: 1.5.2
 Author: Josiah Spence
 Author URI: josiahspence.com
 License: WTFPL
@@ -50,7 +50,7 @@ function paged_post_link_pages($r) {
 		'echo' => 0
 	  );
 	  return wp_parse_args($args, $r);
- 
+
 }
 add_filter('wp_link_pages_args','paged_post_link_pages');
 
@@ -164,11 +164,11 @@ add_filter( 'the_content', 'paged_post_the_content_filter' );
 add_action('admin_menu', 'pps_add_options');
 //Make our function to call the WordPress function to add to the correct menu.
 function pps_add_options() {
-	add_options_page('Paged Post Slider Options', 'Paged Post Slider', 8, 'ppsoptions', 'pps_options_page');	
+	add_options_page('Paged Post Slider Options', 'Paged Post Slider', 'manage_options', 'ppsoptions', 'pps_options_page');
 }
 
 function pps_options_page() {
-	// variables for the field and option names 
+	// variables for the field and option names
 	$opt_name = array('nav_position' =>'pps_nav_position',
 					'count_position' => 'pps_count_position',
 					'style_sheet' => 'pps_style_sheet',
@@ -214,14 +214,14 @@ function pps_options_page() {
 	<?php
 		}
 
-	//Options Form 
+	//Options Form
 	?>
 	<div class="wrap">
 		<h2><?php _e( 'Paged Post Slider Options', 'pps_trans_domain' ); ?></h2>
 
 		<form name="pps_img_options" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 			<input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
-			
+
 			<table class="form-table">
 				<tbody>
 

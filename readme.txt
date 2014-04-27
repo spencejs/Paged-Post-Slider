@@ -3,8 +3,8 @@ Contributors: spencejosiah
 Donate link: http://codecarpenter.com/freebie/wordpress-plugin-paged-post-slider/
 Tags: slider, paged posts, pagination, ajax, carousel, multi-page, nextpage
 Requires at least: 3.5.1
-Tested up to: 3.8
-Stable tag: 1.5.1
+Tested up to: 3.9
+Stable tag: 1.5.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,7 +48,7 @@ For more information about Wordpress' built-in multi-page post funtionality, vis
 
 = Why am I seeing an extra Next/Previous navigation element in my theme? =
 
-Your theme contains its own `wp_link_pages()` tag to accomodate Wordpress' built-in post pagination feature. To ensure that this does not interfere with the plugin, please remove any reference to the  `wp_link_pages()` tag from your `single.php` file. Note that it is possible that the tag is inluded in a template part, rather than directly in the `single.php` file itself. 
+Your theme contains its own `wp_link_pages()` tag to accomodate Wordpress' built-in post pagination feature. To ensure that this does not interfere with the plugin, please remove any reference to the  `wp_link_pages()` tag from your `single.php` file. Note that it is possible that the tag is inluded in a template part, rather than directly in the `single.php` file itself.
 
 = How can I change the way the slider looks? =
 
@@ -56,11 +56,14 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 
 == Screenshots ==
 
-1. An example slide using the included styles in the 2012 theme. 
+1. An example slide using the included styles in the 2012 theme.
 2. The Paged Post Slider Settings page.
 3. An example of a post broken up into slides on the backend. Note the 'Insert Page Break' button.
 
 == Changelog ==
+
+= 1.5.2 =
+* Removes use of depricated has_cap function.
 
 = 1.5.1 =
 * Slight fix to javascript.
@@ -103,6 +106,9 @@ The Paged Post Slider is designed to be syled by the user using standard CSS. On
 * Intial commit.
 
 == Upgrade Notice ==
+
+= 1.5.2 =
+* Removes use of depricated has_cap function.
 
 = 1.5 =
 * Adds option to automatically scroll back to top when a new slide loads.
